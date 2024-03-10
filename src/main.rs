@@ -76,17 +76,7 @@ impl Application for App {
     type Flags = ();
 
     fn new(_flags: Self::Flags) -> (Self, Command<Self::Message>) {
-        let font_commands = Command::batch([
-            iced::font::load(include_bytes!("../assets/FiraSans-Regular.ttf").as_slice()),
-            iced::font::load(include_bytes!("../assets/FiraSans-Bold.ttf").as_slice()),
-            iced::font::load(include_bytes!("../assets/FiraMono-Regular.ttf").as_slice()),
-        ])
-        .map(|result| {
-            result.unwrap();
-            Message::Ignore
-        });
-
-        (Self::default(), font_commands)
+        (Self::default(), Command::none())
     }
 
     fn title(&self) -> String {

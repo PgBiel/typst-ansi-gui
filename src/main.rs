@@ -31,14 +31,10 @@ enum Message {
 
     /// User requested to copy the output.
     Copy,
-
-    /// Ignore this message.
-    Ignore,
 }
 
-const MOON_STARS_ICON: &'static [u8] = include_bytes!("../assets/moon-stars.svg").as_slice();
-const MOON_STARS_FILL_ICON: &'static [u8] =
-    include_bytes!("../assets/moon-stars-fill.svg").as_slice();
+const MOON_STARS_ICON: &[u8] = include_bytes!("../assets/moon-stars.svg").as_slice();
+const MOON_STARS_FILL_ICON: &[u8] = include_bytes!("../assets/moon-stars-fill.svg").as_slice();
 
 #[derive(Copy, Clone, Debug, Default)]
 enum AppTheme {
@@ -126,7 +122,6 @@ impl Application for App {
             Message::Copy => {
                 return iced::clipboard::write(self.result.text());
             }
-            Message::Ignore => {}
         }
 
         Command::none()

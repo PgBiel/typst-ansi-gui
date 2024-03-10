@@ -1,5 +1,5 @@
 # typst-ansi-gui
-Small GUI to convert some Typst code to ANSI using [@frolozotl](https://github.com/frozolotl)'s amazing https://github.com/frozolotl/typst-ansi-hl
+Small GUI to highlight some Typst code using ANSI escape codes with [@frolozotl](https://github.com/frozolotl)'s amazing https://github.com/frozolotl/typst-ansi-hl
 
 Made with [iced](https://iced.rs/).
 

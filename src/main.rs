@@ -5,6 +5,8 @@ use iced::widget::{button, column, container, row, text, text_editor};
 use iced::{Alignment, Application, Command, Element, Font, Length, Padding, Renderer, Settings};
 use std::borrow::Cow;
 use std::sync::Arc;
+use typst_ansi_hl_lib::ext::{termcolor, typst_syntax};
+use typst_ansi_hl_lib::{DeferredWriter, Options};
 
 #[derive(Debug, Default)]
 struct App {
@@ -72,6 +74,24 @@ impl AppTheme {
     }
 }
 
+/// Highlights Typst text as ANSI.
+fn highlight_typst_to_ansi(input: &str) -> String {
+    let parsed = typst_syntax::parse(input);
+    let buf = Vec::new();
+    let mut out = DeferredWriter::new(termcolor::Ansi::new(buf));
+
+    typst_ansi_hl_lib::highlight(
+        &Options::default(),
+        &mut out,
+        &mut termcolor::ColorSpec::new(),
+        &typst_syntax::LinkedNode::new(&parsed),
+    )
+    .map_err(|_| ())
+    .and_then(|_| String::from_utf8(out.into_inner().into_inner()).map_err(|_| ()))
+    .unwrap_or_default()
+    .to_string()
+}
+
 impl Application for App {
     type Executor = iced::executor::Default;
     type Message = Message;
@@ -92,7 +112,7 @@ impl Application for App {
             Message::Submit => {
                 self.result = Content::default();
                 self.result.perform(Action::Edit(Edit::Paste(Arc::new(
-                    "Hey!\n\n\n\n\n\nA\n\n\n\n\n\n\n\n\n\n\nB\n\n\n\n\n\n\nC".to_string(),
+                    highlight_typst_to_ansi(&self.code.text()),
                 ))));
             }
             Message::ResultAction(action) => match action {

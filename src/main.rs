@@ -28,12 +28,16 @@ enum Message {
     /// Change between light and dark theme.
     InvertTheme,
 
+    /// User requested to copy the output.
+    Copy,
+
     /// Ignore this message.
     Ignore,
 }
 
 const MOON_STARS_ICON: &'static [u8] = include_bytes!("../assets/moon-stars.svg").as_slice();
-const MOON_STARS_FILL_ICON: &'static [u8] = include_bytes!("../assets/moon-stars-fill.svg").as_slice();
+const MOON_STARS_FILL_ICON: &'static [u8] =
+    include_bytes!("../assets/moon-stars-fill.svg").as_slice();
 
 #[derive(Copy, Clone, Debug, Default)]
 enum AppTheme {
@@ -93,13 +97,17 @@ impl Application for App {
                 ))));
             }
             Message::ResultAction(action) => match action {
+                // Don't let user edit the output.
                 Action::Edit(_) => {}
                 action => self.result.perform(action),
             },
-            Message::Ignore => {}
             Message::InvertTheme => {
                 self.theme = self.theme.inv();
             }
+            Message::Copy => {
+                return iced::clipboard::write(self.result.text());
+            }
+            Message::Ignore => {}
         }
 
         Command::none()
@@ -133,26 +141,49 @@ impl Application for App {
                 .align_items(Alignment::Center)
                 .into()
             },
+            // Input
             text_editor(&self.code)
                 .font(Font::with_name("Fira Mono"))
                 .on_action(Message::TypstInput)
                 .height(200.0)
                 .into(),
-            {
-                let button = if &self.code.text() == "\n" {
-                    // Disable button for empty input
-                    button(text("Highlight"))
-                } else {
-                    button(text("Highlight")).on_press(Message::Submit)
-                };
-
-                container(button)
-                    .height(100.0)
+            // Middle buttons
+            container(
+                container(row([
+                    container({
+                        let highlight_button = button(text("Highlight"));
+                        if &self.code.text() == "\n" {
+                            // Disable button for empty input
+                            highlight_button
+                        } else {
+                            highlight_button.on_press(Message::Submit)
+                        }
+                    })
                     .width(Length::Fill)
                     .center_x()
-                    .center_y()
-            }
+                    .into(),
+                    container({
+                        let copy_button = button(text("Copy"));
+                        if &self.result.text() == "\n" {
+                            // Disable button for empty output
+                            copy_button
+                        } else {
+                            copy_button.on_press(Message::Copy)
+                        }
+                    })
+                    .width(Length::Fill)
+                    .center_x()
+                    .into(),
+                ]))
+                .max_width(400.0)
+                .center_x(),
+            )
+            .height(100.0)
+            .width(Length::Fill)
+            .center_x()
+            .center_y()
             .into(),
+            // Output
             text_editor(&self.result)
                 .font(Font::with_name("Fira Mono"))
                 .on_action(Message::ResultAction)

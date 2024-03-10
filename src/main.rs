@@ -5,7 +5,6 @@ use iced::widget::{button, column, container, row, text, text_editor};
 use iced::{Alignment, Application, Command, Element, Font, Length, Padding, Renderer, Settings};
 use std::borrow::Cow;
 use std::sync::Arc;
-use iced::theme::Button;
 
 #[derive(Debug, Default)]
 struct App {
@@ -115,19 +114,18 @@ impl Application for App {
 
     fn view(&self) -> Element<'_, Self::Message, Self::Theme, Renderer> {
         column([
+            // Title and theme button
             {
                 let bold_font = Font {
                     weight: Weight::Bold,
                     ..Font::default()
                 };
-                let theme_button =
-                    button(Svg::new(Handle::from_memory(Cow::from(self.theme.icon()))))
-                        .style(Button::Secondary)
-                        .on_press(Message::InvertTheme);
+                let theme_icon = Svg::new(Handle::from_memory(Cow::from(self.theme.icon())));
+                let theme_button = button(theme_icon).on_press(Message::InvertTheme);
 
                 row([
                     container(theme_button)
-                        .width(25.0)
+                        .width(45.0)
                         .height(72.0)
                         .center_y()
                         .into(),

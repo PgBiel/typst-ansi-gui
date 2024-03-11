@@ -7,8 +7,10 @@ authors = ["PgBiel <https://github.com/PgBiel>"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-iced = { git = "https://github.com/PgBiel/iced", branch = "select-all", features = ["svg"] }
 typst-ansi-hl = { git = "https://github.com/PgBiel/typst-ansi-hl", branch = "lib-moment" }
 
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+iced = { git = "https://github.com/PgBiel/iced", branch = "select-all", features = ["svg"] }
+
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-iced = { git = "https://github.com/PgBiel/iced", branch = "select-all", features = ["svg", "webgl"] }
+iced = { git = "https://github.com/PgBiel/iced", branch = "select-all", default-features = false, features = ["svg", "webgl"] }

@@ -2784,13 +2784,13 @@ name = "typst-ansi-gui"
 version = "0.1.0"
 dependencies = [
  "iced",
- "typst-ansi-hl-lib",
+ "typst-ansi-hl",
 ]
 
 [[package]]
-name = "typst-ansi-hl-lib"
+name = "typst-ansi-hl"
 version = "0.1.0"
-source = "git+https://github.com/PgBiel/typst-ansi-hl?branch=lib-moment#11d4f0e0dd896e519bda15ae3ecedf29949877c2"
+source = "git+https://github.com/PgBiel/typst-ansi-hl?branch=lib-moment#9198e4bf47c5e237d3341a266c43883b1bc95b72"
 dependencies = [
  "bat",
  "termcolor",

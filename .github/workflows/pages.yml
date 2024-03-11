@@ -55,11 +55,11 @@ jobs:
           cp site/index.html -t _site
 
       - name: 🛠️ Compile to WASM
-        run: "cargo build --verbose --target wasm32-unknown-unknown"
+        run: "cargo build --verbose --release --target wasm32-unknown-unknown"
 
       - name: 🛠️ Run wasm-bindgen for the website
         run: |
-          wasm-bindgen target/wasm32-unknown-unknown/debug/typst-ansi-gui.wasm --out-dir _site --web
+          wasm-bindgen target/wasm32-unknown-unknown/release/typst-ansi-gui.wasm --out-dir _site --web
           ls -ltah _site
 
       - name: 📤 Upload artifact

@@ -9,4 +9,7 @@ target/
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
 
+# ignore wasm-bindgen build results
+site/typst-ansi-gui*
+
 .idea

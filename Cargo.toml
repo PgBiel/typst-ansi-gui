@@ -9,3 +9,6 @@ authors = ["PgBiel <https://github.com/PgBiel>"]
 [dependencies]
 iced = { git = "https://github.com/PgBiel/iced", branch = "select-all", features = ["svg"] }
 typst-ansi-hl = { git = "https://github.com/PgBiel/typst-ansi-hl", branch = "lib-moment" }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+iced = { git = "https://github.com/PgBiel/iced", branch = "select-all", features = ["svg", "webgl"] }

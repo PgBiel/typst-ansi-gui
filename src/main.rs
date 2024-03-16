@@ -5,8 +5,7 @@ use iced::widget::{button, column, container, row, text, text_editor};
 use iced::{Alignment, Application, Command, Element, Font, Length, Padding, Renderer, Settings};
 use std::borrow::Cow;
 use std::sync::Arc;
-use typst_ansi_hl::ext::{termcolor, typst_syntax};
-use typst_ansi_hl::{DeferredWriter, Options};
+use typst_ansi_hl::Highlighter;
 
 #[derive(Debug, Default)]
 struct App {
@@ -72,20 +71,7 @@ impl AppTheme {
 
 /// Highlights Typst text as ANSI.
 fn highlight_typst_to_ansi(input: &str) -> String {
-    let parsed = typst_syntax::parse(input);
-    let buf = Vec::new();
-    let mut out = DeferredWriter::new(termcolor::Ansi::new(buf));
-
-    typst_ansi_hl::highlight(
-        &Options::default(),
-        &mut out,
-        &mut termcolor::ColorSpec::new(),
-        &typst_syntax::LinkedNode::new(&parsed),
-    )
-    .map_err(|_| ())
-    .and_then(|_| String::from_utf8(out.into_inner().into_inner()).map_err(|_| ()))
-    .unwrap_or_default()
-    .to_string()
+    Highlighter::default().highlight(input).unwrap_or_default()
 }
 
 impl Application for App {

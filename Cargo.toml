@@ -7,7 +7,7 @@ authors = ["PgBiel <https://github.com/PgBiel>"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-typst-ansi-hl = { git = "https://github.com/frozolotl/typst-ansi-hl", rev = "b2503edae24b375b92c2727b88d2b0d58d38d52a" }
+typst-ansi-hl = { git = "https://github.com/frozolotl/typst-ansi-hl", rev = "56fbcfd755e44731a193de7626be82b8788cab51" }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 iced = { git = "https://github.com/PgBiel/iced", branch = "select-all", features = ["svg"] }

@@ -432,19 +432,21 @@ dependencies = [
 
 [[package]]
 name = "comemo"
-version = "0.3.1"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bf5705468fa80602ee6a5f9318306e6c428bffd53e43209a78bc05e6e667c6f4"
+checksum = "df6916408a724339aa77b18214233355f3eb04c42eb895e5f8909215bd8a7a91"
 dependencies = [
  "comemo-macros",
+ "once_cell",
+ "parking_lot 0.12.1",
  "siphasher 1.0.0",
 ]
 
 [[package]]
 name = "comemo-macros"
-version = "0.3.1"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "54af6ac68ada2d161fa9cc1ab52676228e340866d094d6542107e74b82acc095"
+checksum = "c8936e42f9b4f5bdfaf23700609ac1f11cb03ad4c1ec128a4ee4fd0903e228db"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2556,7 +2558,7 @@ dependencies = [
 [[package]]
 name = "typst-ansi-hl"
 version = "0.1.0"
-source = "git+https://github.com/PgBiel/typst-ansi-hl?branch=lib-moment#b3cc7d347e2f7d76bcd126f01fadad4e3ce053f5"
+source = "git+https://github.com/frozolotl/typst-ansi-hl?rev=b2503edae24b375b92c2727b88d2b0d58d38d52a#b2503edae24b375b92c2727b88d2b0d58d38d52a"
 dependencies = [
  "ansi_colours",
  "once_cell",
@@ -2569,14 +2571,14 @@ dependencies = [
 
 [[package]]
 name = "typst-syntax"
-version = "0.10.0"
-source = "git+https://github.com/typst/typst?tag=v0.10.0#70ca0d257bb4ba927f63260e20443f244e0bb58c"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "367d86bf18f0363146bea1ea76fad19b54458695fdfad5e74ead3ede574b75fe"
 dependencies = [
  "comemo",
  "ecow",
  "once_cell",
  "serde",
- "tracing",
  "unicode-ident",
  "unicode-math-class",
  "unicode-script",

@@ -2,10 +2,12 @@ use iced::font::Weight;
 use iced::widget::svg::{Handle, Svg};
 use iced::widget::text_editor::{Action, Content, Edit};
 use iced::widget::{button, column, container, row, text, text_editor};
-use iced::{Alignment, Application, Command, Element, Font, Length, Padding, Renderer, Settings};
+use iced::{Alignment, Command, Element, Font, Length, Padding, Renderer};
 use std::borrow::Cow;
 use std::sync::Arc;
 use typst_ansi_hl::Highlighter;
+
+const TITLE: &str = "Typst ANSI GUI";
 
 #[derive(Debug, Default)]
 struct App {
@@ -74,21 +76,8 @@ fn highlight_typst_to_ansi(input: &str) -> String {
     Highlighter::default().highlight(input).unwrap_or_default()
 }
 
-impl Application for App {
-    type Executor = iced::executor::Default;
-    type Message = Message;
-    type Theme = iced::Theme;
-    type Flags = ();
-
-    fn new(_flags: Self::Flags) -> (Self, Command<Self::Message>) {
-        (Self::default(), Command::none())
-    }
-
-    fn title(&self) -> String {
-        "Typst ANSI GUI".to_string()
-    }
-
-    fn update(&mut self, message: Self::Message) -> Command<Self::Message> {
+impl App {
+    fn update(&mut self, message: Message) -> Command<Message> {
         match message {
             Message::TypstInput(input) => self.code.perform(input),
             Message::Submit => {
@@ -113,7 +102,7 @@ impl Application for App {
         Command::none()
     }
 
-    fn view(&self) -> Element<'_, Self::Message, Self::Theme, Renderer> {
+    fn view(&self) -> Element<'_, Message, iced::Theme, Renderer> {
         column([
             // Title and theme button
             {
@@ -193,21 +182,17 @@ impl Application for App {
         .into()
     }
 
-    fn theme(&self) -> Self::Theme {
+    fn theme(&self) -> iced::Theme {
         self.theme.theme()
     }
 }
 
-fn main() {
-    let settings = Settings {
-        fonts: vec![
-            Cow::from(include_bytes!("../assets/FiraSans-Regular.ttf").as_slice()),
-            Cow::from(include_bytes!("../assets/FiraSans-Bold.ttf").as_slice()),
-            Cow::from(include_bytes!("../assets/FiraMono-Regular.ttf").as_slice()),
-        ],
-        default_font: Font::with_name("Fira Sans"),
-        ..Settings::default()
-    };
-
-    App::run(settings).unwrap()
+fn main() -> iced::Result {
+    iced::program(TITLE, App::update, App::view)
+        .font(include_bytes!("../assets/FiraSans-Regular.ttf").as_slice())
+        .font(include_bytes!("../assets/FiraSans-Bold.ttf").as_slice())
+        .font(include_bytes!("../assets/FiraMono-Regular.ttf").as_slice())
+        .default_font(Font::with_name("Fira Sans"))
+        .theme(App::theme)
+        .run()
 }

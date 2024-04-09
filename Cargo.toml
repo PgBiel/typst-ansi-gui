@@ -13,4 +13,4 @@ typst-ansi-hl = { git = "https://github.com/frozolotl/typst-ansi-hl", rev = "56f
 iced = { git = "https://github.com/PgBiel/iced", branch = "select-all", features = ["svg"] }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-iced = { git = "https://github.com/PgBiel/iced", branch = "select-all", default-features = false, features = ["svg", "webgl"] }
+iced = { git = "https://github.com/PgBiel/iced", branch = "select-all", default-features = false, features = ["svg", "tiny-skia", "wgpu", "webgl"] }

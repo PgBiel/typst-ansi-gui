@@ -3122,8 +3122,9 @@ dependencies = [
 
 [[package]]
 name = "typst-ansi-hl"
-version = "0.1.0"
-source = "git+https://github.com/frozolotl/typst-ansi-hl?rev=56fbcfd755e44731a193de7626be82b8788cab51#56fbcfd755e44731a193de7626be82b8788cab51"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6b457d0812d51dbc28f7a5b8583b8c28cd3c43628e1e7e5a0ae63975fda65351"
 dependencies = [
  "ansi_colours",
  "once_cell",

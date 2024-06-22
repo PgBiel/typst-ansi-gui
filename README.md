@@ -30,3 +30,7 @@ Just run `cargo build` and the built application will be at `target/debug/typst-
 ## Formatting and Checking
 
 To format the code, run `cargo fmt`. To check, run `cargo clippy`.
+
+## License
+
+Licensed under MIT or Apache-2.0, at your choice.

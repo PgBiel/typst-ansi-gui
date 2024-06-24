@@ -3,6 +3,8 @@ Small GUI to highlight some Typst code using ANSI escape codes with [@frolozotl]
 
 Made with [iced](https://iced.rs/).
 
+You can **try it in your browser:** https://pgbiel.github.io/typst-ansi-gui/
+
 ![app screenshot](https://github.com/PgBiel/typst-ansi-gui/assets/9021226/7a60c269-b78b-4ee6-a0a9-93966fa61d36)
 
 ## Usage

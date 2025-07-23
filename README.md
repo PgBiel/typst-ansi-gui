@@ -38,3 +38,7 @@ To format the code, run `cargo fmt`. To check, run `cargo clippy`.
 ## License
 
 Licensed under MIT or Apache-2.0, at your choice.
+
+## Disclaimer
+
+This project is not officially affiliated with Typst GmbH.

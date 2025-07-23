@@ -6,7 +6,7 @@ name: Pages CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -45,9 +45,9 @@ jobs:
 
       - name: 📥 Setup wasm-bindgen
         id: setup-wasm-bindgen
-        uses: jetli/wasm-bindgen-action@v0.2.0
+        uses: jetli/wasm-bindgen-action@20b33e20595891ab1a0ed73145d8a21fc96e7c29
         with:
-          version: 'latest'
+          version: "latest"
 
       - name: 📄 Setup Pages index.html
         run: |
@@ -64,7 +64,7 @@ jobs:
 
       - name: 📤 Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
 
   # Deployment job
   deploy:
@@ -76,4 +76,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4

@@ -1,6 +1,8 @@
 # typst-ansi-gui
 Small GUI to highlight some Typst code using ANSI escape codes with [@frolozotl](https://github.com/frozolotl)'s amazing https://github.com/frozolotl/typst-ansi-hl
 
+(**UPDATE:** Also check out `typst-ansi-web` by the author: https://pgbiel.github.io/typst-ansi-web/)
+
 Made with [iced](https://iced.rs/).
 
 You can **try it in your browser:** https://pgbiel.github.io/typst-ansi-gui/

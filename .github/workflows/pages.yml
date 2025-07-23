@@ -47,7 +47,7 @@ jobs:
         id: setup-wasm-bindgen
         uses: jetli/wasm-bindgen-action@20b33e20595891ab1a0ed73145d8a21fc96e7c29
         with:
-          version: "latest"
+          version: "0.2.92"
 
       - name: 📄 Setup Pages index.html
         run: |
